@@ -1,0 +1,22 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 24px;
+  font-family: sans-serif;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: #212529;
+  font-weight: 600;
+}
+
+.header-text p {
+  margin: 4px 0 0 0;
+  font-size: 0.95rem;
+  color: #6c757d;
+}

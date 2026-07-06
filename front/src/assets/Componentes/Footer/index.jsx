@@ -1,9 +1,11 @@
-import "./style.css"
+import React from 'react';
+import './style.css';
 
 export default function Footer() {
-    return (
-        <footer>
-            <p>© 2024 My Company. All rights reserved.</p>
-        </footer>
-    )
+  return (
+    <footer className="footer">
+      <p>&copy; {new Date().getFullYear()} Sistema de Gerenciamento. Todos os direitos reservados.</p>
+      <p className="footer-version">v1.0.0</p>
+    </footer>
+  );
 }

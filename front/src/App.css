@@ -180,5 +180,11 @@
   &::after {
     right: 0;
     border-right-color: var(--border);
+    .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 16px 0;
+}
   }
 }
