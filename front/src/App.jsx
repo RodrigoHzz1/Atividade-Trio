@@ -1,81 +1,37 @@
-import React, { useState } from 'react';
-import Navbar from '../Componentes/Navbar';
-import Header from '../Componentes/Header';
-import Input from '../Componentes/input';
-import Card from '../Componentes/card';
-import Footer from '../Componentes/Footer';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";        
 
-export default function GerenciamentoPage() {
-  // Estado para o formulário de cadastro
-  const [formData, setFormData] = useState({ nome: '', email: '' });
-  
-  // Estado simulando a lista que vem do Back-end
-  const [lista, setLista] = useState([
-    { id: 1, nome: 'João Silva', email: 'joao@email.com' },
-  ]);
+// ⚙️ Componente global (Navbar)
+import Navbar from "./Componentes/Navbar/index.jsx";
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+// ⚙️ Suas 6 páginas com conteúdo estruturado
+import Home from "./Pages/Home";
+import Cadastro from "./Pages/Cadastro";
+import Login from "./Pages/Login";
+import Dashboard from "./Pages/Dashboard";
+import Perfil from "./Pages/Perfil";
+import RecuperarSenha from "./Pages/RecuperarSenha";
 
-  const handleCadastrar = (e) => {
-    e.preventDefault();
-    // Aqui entra a integração com o Back-end (ex: axios.post)
-    const novoItem = { id: Date.now(), ...formData };
-    setLista([...lista, novoItem]);
-    setFormData({ nome: '', email: '' }); // Limpa os inputs
-  };
+// Estilos globais
+import "./App.css"; 
 
-  const handleDeletar = (id) => {
-    // Aqui entra o axios.delete para o Back-end
-    setLista(lista.filter(item => item.id !== id));
-  };
-
+export default function App() {
   return (
-    <div className="page-container">
-      <Navbar />
-      
-      <main className="content">
-        <Header title="Gerenciamento de Usuários" />
-        
-        {/* Formulário de Cadastro usando seu componente de Input */}
-        <form onSubmit={handleCadastrar} className="cadastro-form">
-          <Input 
-            label="Nome Completo" 
-            name="nome" 
-            value={formData.nome} 
-            onChange={handleChange} 
-            placeholder="Digite o nome"
-          />
-          <Input 
-            label="E-mail" 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            placeholder="Digite o e-mail"
-          />
-          <button type="submit" className="btn-submit">Salvar Cadastro</button>
-        </form>
+    <BrowserRouter>
+      {/* Menu fixo no topo */}
+      <Navbar /> 
 
-        <hr />
-
-        {/* Listagem dos cadastros usando seu componente de Card */}
-        <div className="cards-grid">
-          {lista.map(item => (
-            <Card 
-              key={item.id}
-              id={item.id}
-              title={item.nome}
-              subtitle={item.email}
-              onDelete={handleDeletar}
-              onEdit={(id) => console.log('Editar o id:', id)}
-            />
-          ))}
-        </div>
+      {/* Área onde as páginas mudam dinamicamente */}
+      <main style={{ padding: "20px", minHeight: "80vh" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/recuperar" element={<RecuperarSenha />} />
+        </Routes>
       </main>
-
-      <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
